@@ -2,6 +2,8 @@
 
 namespace RestauranteLegal\Models;
 
+use Exception;
+
 class Prato
 {
 
@@ -31,9 +33,28 @@ class Prato
     {
         return $this->nomePrato;
     }
+    
+    public function setNomePrato(string $pNomeprato): void
+    {
+        // Não pode ser vazio
+        //Ao menos 3 caractere
+        if (strlen($pNomeprato) == "") {
+            throw new Exception("O nome do prato não pode ser vazio");
+        }
+        else if (strlen($pNomeprato) < 3) {
+            throw new Exception("O nome do prato deve ter ao menos 3 caracteres");
+        }
+        $this->nomePrato = $pNomeprato;
+    }
+
     public function getDescricao(): string
     {
         return $this->descricao;
+    }
+
+    public function setDescricao(string $pDescricao): void
+    {
+        $this->descricao = $pDescricao;
     }
 
     public function getPreco(): float
