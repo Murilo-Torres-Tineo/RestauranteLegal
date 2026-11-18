@@ -31,4 +31,13 @@ $minhabebida = new Bebida(1, "Água", "500ml", "N", "Garrafinha de plátisco que
 echo $minhabebida->getBebidaHTML() . "<br>";
 
 $minhasobremesa = new Sobremesa(1, " Pudim de Leite Condensado", "Pudim tradicional com calda de caramelo", 12.00);
-echo $minhasobremesa->getSobremesaHTML();
+echo $minhasobremesa->getSobremesaHTML() . "<br>";
+
+echo "<br> =====Segundo Prato===== <br>";
+
+try {
+    $meusegundoprato = new Prato(2, "Lasanha", "Maravilhosa Lasanha à bolonhesa", 39.90);
+    echo $meusegundoprato->getPratoHTML();
+} catch (\Throwable $th) {
+    echo $th->getMessage();
+}

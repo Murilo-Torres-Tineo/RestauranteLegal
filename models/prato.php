@@ -22,26 +22,30 @@ class Prato
         float $preco
     ) {
 
-        $this->idPrato = $id;
-        $this->nomePrato = $nome;
-        $this->descricao = $descricao;
-        $this->preco = $preco;
+        $this->setIdPrato($id);
+        $this->setNomePrato($nome);
+        $this->setDescricao($descricao);
+        $this->setPreco($preco);
 
     }
     //Getters and setter
+
+    public function setIdPrato(int $pIdPrato): void
+    {
+        $this->idPrato = $pIdPrato;
+    }
     public function getNomePrato(): string
     {
         return $this->nomePrato;
     }
-    
+
     public function setNomePrato(string $pNomeprato): void
     {
         // Não pode ser vazio
-        //Ao menos 3 caractere
-        if (strlen($pNomeprato) == "") {
+        // Ao menos 3 caracteres
+        if (strlen(trim($pNomeprato)) == 0) {
             throw new Exception("O nome do prato não pode ser vazio");
-        }
-        else if (strlen($pNomeprato) < 3) {
+        } else if (strlen(trim($pNomeprato)) < 3) {
             throw new Exception("O nome do prato deve ter ao menos 3 caracteres");
         }
         $this->nomePrato = $pNomeprato;
@@ -68,6 +72,15 @@ class Prato
     public function getPrecoFormatado(): string
     {
         return "R$" . number_format($this->preco, 2);
+    }
+
+    public function setPreco(float $pPreco): void
+    {
+        // Não pode ser negativo nem zero
+        if ($pPreco <= 0) {
+            throw new Exception("O preço do prato não pode ser negativo ou zero.");
+        }
+        $this->preco = $pPreco;
     }
 
     public function getPratoHTML(): string
